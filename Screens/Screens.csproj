@@ -42,12 +42,11 @@
   <ItemGroup>
     <Compile Include="Elements\ContainerElement.cs" />
     <Compile Include="Elements\FieldElement.cs" />
-    <Compile Include="Elements\IScreenElement.cs" />
     <Compile Include="Database\IScreenElementRepository.cs" />
+    <Compile Include="Elements\ScreenElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\ScreenElementRecord.cs" />
     <Compile Include="Screen.cs" />
-    <Compile Include="ScreenElementFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

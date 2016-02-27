@@ -8,7 +8,7 @@ namespace Screens
 	public class Screen
 	{
 		private readonly IScreenElementRepository _elementRepository;
-		private Guid _screenId;
+		private readonly Guid _screenId;
 
 		public Screen(Guid screenId, IScreenElementRepository elementRepository)
 		{
@@ -16,15 +16,12 @@ namespace Screens
 			_screenId = screenId;
 		}
 
-		public IEnumerable<IScreenElement> Elements
+		public IEnumerable<ScreenElement> Elements
 		{
 			get
 			{
 				var root = _elementRepository.GetRootElement(_screenId);
-				var elementFactory = new ScreenElementFactory(_elementRepository);
-
-				yield return elementFactory.Create(root);
-				
+				yield return root.CreateElement(_elementRepository);
 			}
 		}
 	}

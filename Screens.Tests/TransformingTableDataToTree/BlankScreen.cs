@@ -12,13 +12,16 @@ namespace Screens.Tests.TransformingTableDataToTree
 		[Fact]
 		public void HasOneRootContainer()
 		{
-			var repo = new FakeScreenElementRepository(new List<ScreenElementRecord>
-			{
-				new ScreenElementRecord { ElementType = 0 }
-			});
-
 			var screenId = Guid.NewGuid();
+			var repo = 
+				new FakeScreenElementRepository()
+				.WithScreen(screenId, new List<ScreenElementRecord>
+				{
+					new ScreenElementRecord { ElementType = 0 }
+				});
+
 			var screen = new Screen(screenId, repo);
+
 			Assert.Equal(1, screen.Elements.Count());
 			Assert.IsType<ContainerElement>(screen.Elements.Single());
 		}

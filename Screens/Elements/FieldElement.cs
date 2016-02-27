@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Screens.Database;
 
 namespace Screens.Elements
 {
-	public class FieldElement : IScreenElement
+	public class FieldElement : ScreenElement
 	{
-		public IEnumerable<IScreenElement> Elements { get; set; }
-		public Guid Id { get; }
+		public FieldElement(IScreenElementRepository elementRepository) : base(elementRepository)
+		{
+		}
 	}
 }

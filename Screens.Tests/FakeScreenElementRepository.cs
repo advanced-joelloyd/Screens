@@ -2,27 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Screens.Database;
-using Screens.Elements;
 
 namespace Screens.Tests
 {
 	public class FakeScreenElementRepository : IScreenElementRepository
 	{
-		private readonly List<ScreenElementRecord> _elements;
+		private readonly Dictionary<Guid, List<ScreenElementRecord>> _screens = new Dictionary<Guid, List<ScreenElementRecord>>();
 
-		public FakeScreenElementRepository(List<ScreenElementRecord> elements)
+		public FakeScreenElementRepository WithScreen(Guid screenId, List<ScreenElementRecord> elements)
 		{
-			_elements = elements;
+			_screens[screenId] = elements;
+			return this;
 		}
 
 		public ScreenElementRecord GetRootElement(Guid screenId)
 		{
-			return _elements.Single(r => r.ParentElementId == Guid.Empty);
+			return _screens[screenId].Single(r => r.ParentElementId == Guid.Empty);
 		}
 
 		public IEnumerable<ScreenElementRecord> GetChildElements(Guid elementId)
 		{
-			return _elements.Where(e => e.ParentElementId == elementId);
+			return _screens.SelectMany(s => s.Value).Where(e => e.ParentElementId == elementId);
 		}
 	}
 }
